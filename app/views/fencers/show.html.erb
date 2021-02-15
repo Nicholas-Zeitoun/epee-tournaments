@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @fencer.name %>
+</p>
+
+<p>
+  <strong>Ranking:</strong>
+  <%= @fencer.ranking %>
+</p>
+
+<%= link_to 'Edit', edit_fencer_path(@fencer) %> |
+<%= link_to 'Back', fencers_path %>
