@@ -10,5 +10,9 @@
   <%= @fencer.ranking %>
 </p>
 
+<% if @fencer.photo.attached? %>
+  <%= cl_image_tag @fencer.photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+
 <%= link_to 'Edit', edit_fencer_path(@fencer) %> |
 <%= link_to 'Back', fencers_path %>
