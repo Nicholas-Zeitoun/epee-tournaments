@@ -5,5 +5,13 @@
   <%= @tournament.date %>
 </p>
 
+<% if @tournament.fencers.blank? %>
+  There are no fencers registered for this tournament...
+<% else %>
+  <% @tournament.fencers.each do |fencer| %>
+    <p><%= fencer.name %></p>
+  <% end %>
+<% end %>
+
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |
 <%= link_to 'Back', tournaments_path %>

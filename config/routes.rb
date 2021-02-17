@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :tournaments
+  resources :tournaments do
+    resources :participations, only: :create
+  end
   resources :fencers
   # root to: 'pages#home'
   root to: 'tournaments#index'
