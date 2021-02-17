@@ -8,9 +8,16 @@
 <% if @tournament.fencers.blank? %>
   There are no fencers registered for this tournament...
 <% else %>
-  <% @tournament.fencers.each do |fencer| %>
-    <p><%= fencer.name %></p>
+  <% @tournament.participations.each do |part| %>
+    <p><%= part.fencer.name %> <%= link_to 'Remove', part, method: :delete %></p>
   <% end %>
+<% end %>
+
+<hr>
+
+<%= simple_form_for [ @tournament, @participation ] do |f| %>
+  <%= f.association :fencer %>
+  <%= f.button :submit %>
 <% end %>
 
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |

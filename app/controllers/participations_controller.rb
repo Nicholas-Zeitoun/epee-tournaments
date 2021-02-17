@@ -21,17 +21,26 @@ class ParticipationsController < ApplicationController
 
   # POST /participations or /participations.json
   def create
+    @tournament = Tournament.find(params[:tournament_id])
+    @fencer = Fencer.find(params[:participation][:fencer_id])
     @participation = Participation.new(participation_params)
-
-    respond_to do |format|
-      if @participation.save
-        format.html { redirect_to @participation, notice: "Participation was successfully created." }
-        format.json { render :show, status: :created, location: @participation }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @participation.errors, status: :unprocessable_entity }
-      end
+    @participation.tournament = @tournament
+    @participation.fencer = @fencer
+    if @participation.save
+      redirect_to tournament_path(@tournament)
+    else
+      render 'tournaments/show'
     end
+
+    # respond_to do |format|
+    #   if @participation.save
+    #     format.html { redirect_to @participation, notice: "Participation was successfully created." }
+    #     format.json { render :show, status: :created, location: @participation }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @participation.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /participations/1 or /participations/1.json
@@ -51,7 +60,7 @@ class ParticipationsController < ApplicationController
   def destroy
     @participation.destroy
     respond_to do |format|
-      format.html { redirect_to participations_url, notice: "Participation was successfully destroyed." }
+      format.html { redirect_to request.referrer, notice: "Participation was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -64,6 +73,7 @@ class ParticipationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def participation_params
-      params.fetch(:participation, {})
+      # params.fetch(:participation, {})
+      params.permit(:participation, :tournament_id, :fencer_id)
     end
 end
