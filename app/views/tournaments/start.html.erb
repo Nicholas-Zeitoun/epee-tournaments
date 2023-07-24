@@ -1,0 +1,7 @@
+<h1>Tourney has started!</h1>
+<hr>
+<p><strong>Fencers in tournament:</strong></p>
+
+<% @tournament.participations.each do |part| %>
+    <p><%= part.fencer.name %></p>
+  <% end %>

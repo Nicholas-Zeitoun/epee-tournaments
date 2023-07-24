@@ -20,5 +20,16 @@
   <%= f.button :submit %>
 <% end %>
 
+<hr>
+
+<% if @tournament.participations.count >= 5 %>
+  <p>Start tournament</p>
+  <%= link_to 'Create Poules', start_path(@tournament) %>
+<% else %>
+  <p>Not enought fencers to start...</p>
+<% end %>
+
+<hr>
+
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> |
 <%= link_to 'Back', tournaments_path %>

@@ -1,5 +1,5 @@
 class TournamentsController < ApplicationController
-  before_action :set_tournament, only: %i[ show edit update destroy ]
+  before_action :set_tournament, only: %i[ show edit update destroy start]
 
   # GET /tournaments or /tournaments.json
   def index
@@ -18,6 +18,11 @@ class TournamentsController < ApplicationController
 
   # GET /tournaments/1/edit
   def edit
+  end
+
+  # GET /tournaments/1/start
+  def start
+
   end
 
   # POST /tournaments or /tournaments.json
